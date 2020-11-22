@@ -1,6 +1,7 @@
 package com.study.store.infrastructure.springdata.entity
 
 import com.study.store.domain.model.Payment
+import java.io.Serializable
 import java.time.LocalDateTime
 import javax.persistence.*
 
@@ -9,20 +10,16 @@ import javax.persistence.*
 class PaymentEntity(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY) val id: Long,
         val cardNumber: String,
-        val orderNumber: Long,
-        val createDate: LocalDateTime,
-        val confirmationDate: LocalDateTime) {
+        val orderNumber: Long): Serializable {
 
 
     companion object {
         fun toPayment(paymentEntity: PaymentEntity): Payment {
             return Payment(cardNumber = paymentEntity.cardNumber,
-                    orderNumber = paymentEntity.orderNumber,
-                    createDate = paymentEntity.createDate,
-                    confirmationDate = paymentEntity.confirmationDate)
+                    orderNumber = paymentEntity.orderNumber)
         }
         fun toPaymentEntity(payment: Payment): PaymentEntity {
-            return PaymentEntity(0, payment.cardNumber, payment.orderNumber, payment.createDate, payment.confirmationDate)
+            return PaymentEntity(0, payment.cardNumber, payment.orderNumber)
         }
     }
 

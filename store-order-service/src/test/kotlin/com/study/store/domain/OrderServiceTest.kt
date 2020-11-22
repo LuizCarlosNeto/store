@@ -65,5 +65,5 @@ class OrderServiceTest {
     }
 
     fun getOrder(): Order = Order(1, currentDate, getPayment())
-    fun getPayment(): Payment = Payment("",1, currentDate, currentDate)
+    fun getPayment(): Payment = Payment("",1)
 }

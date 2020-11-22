@@ -18,6 +18,6 @@ data class OrderRequest(@NotNull val orderNumber: Long,
     }
 
     fun toPayment(paymentRequest: PaymentRequest): Payment {
-        return Payment(paymentRequest.cardNumber, paymentRequest.orderNumber, paymentRequest.createDate, paymentRequest.confirmationDate)
+        return Payment(paymentRequest.cardNumber, paymentRequest.orderNumber)
     }
 }
