@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "t_order")
 class OrderEntity(
         @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        val id: Long,
         val orderNumber: Long,
         val createDate: LocalDateTime,
         @OneToOne(cascade = [CascadeType.ALL],
@@ -17,7 +18,7 @@ class OrderEntity(
 
     companion object {
         fun fromOrder(order: Order): OrderEntity {
-            return OrderEntity(order.orderNumber, order.createDate, PaymentEntity.toPaymentEntity(order.payment))
+            return OrderEntity(0, order.orderNumber, order.createDate, PaymentEntity.toPaymentEntity(order.payment))
         }
     }
     fun toModel(): Order {

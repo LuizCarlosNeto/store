@@ -7,17 +7,18 @@ import com.study.store.presentation.dto.OrderDTO
 import com.sun.istack.NotNull
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 data class OrderRequest(@NotNull val orderNumber: Long,
                         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
                         @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-                        val createDate: LocalDateTime,
+                        val createDate: String,
                         val paymentRequest: PaymentRequest) {
     fun toModel(): Order {
-        return Order(orderNumber, createDate, toPayment(paymentRequest));
+        return Order(orderNumber, LocalDateTime.parse(createDate, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")), toPayment(paymentRequest));
     }
 
-    fun toPayment(paymentRequest: PaymentRequest): Payment {
+    private fun toPayment(paymentRequest: PaymentRequest): Payment {
         return Payment(paymentRequest.cardNumber, paymentRequest.orderNumber)
     }
 }

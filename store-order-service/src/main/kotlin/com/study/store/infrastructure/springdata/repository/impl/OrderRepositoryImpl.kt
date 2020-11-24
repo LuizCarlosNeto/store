@@ -19,4 +19,12 @@ class OrderRepositoryImpl(private val orderEntityRepository: OrderEntityReposito
             throw BusinessException("Ordem não encontrada")
         } else return order.get().toModel()
     }
+
+    override fun findByByOrderNumberCheck(orderNumber: Long): Boolean {
+        val order = orderEntityRepository.findByOrderNumber(orderNumber)
+        if (order.isPresent) {
+            throw BusinessException("Ordem já cadastrada na base de dados")
+        }
+        return order.isPresent
+    }
 }

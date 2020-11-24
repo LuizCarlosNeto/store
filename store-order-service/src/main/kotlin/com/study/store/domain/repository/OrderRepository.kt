@@ -7,4 +7,5 @@ interface OrderRepository {
 
     fun createOrder(order: Order): Order
     fun findByByOrderNumber(orderNumber: Long): Order
+    fun findByByOrderNumberCheck(orderNumber: Long): Boolean
 }
